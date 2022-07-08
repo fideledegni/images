@@ -1,0 +1,40 @@
+:root {
+  --red: #e63946;
+  --beige: #f1faee;
+  --paleGreen: #a8dadc;
+  --blue: #457b9d;
+  --darkBlue: #1d3557;
+}
+
+* {
+  font-family: Barlow, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none !important;
+  transition: all 0.3s;
+}
+
+a:hover {
+  color: #14b8a6;
+  transition: all 0.3s;
+}
+
+nav {
+  color: var(--beige);
+  background-color: var(--blue);
+  font-size: 35px;
+  font-weight: bold;
+  font-family: "The Nautigal";
+  padding: 15px;
+  text-align: center;
+}
+
+footer {
+	color: white;
+	background-color: var(--darkBlue);
+	display: block;
+  padding: 15px;
+  text-align: center;
+}
