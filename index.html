@@ -23,18 +23,27 @@
         //import the library to talk to imagemagick
         import * as Magick from 'https://knicknic.github.io/wasm-imagemagick/magickApi.js';
     
-        // ...
-    
+        // various html elements
+        let rotatedImage = document.getElementById('rotatedImage');
+
         // Fetch the image to rotate, and call image magick
-        let DoMagickCall = async function () {
-          // ....
-    
+        let doMagickCall = async function () {
+          let fetchedSourceImage = await fetch("src/images/chateau.JPG");
+          let arrayBuffer = await fetchedSourceImage.arrayBuffer();
+          let sourceBytes = new Uint8Array(arrayBuffer);
+
           // calling image magick with one source image, and command to rotate & resize image
-          let processedFiles = await Magick.Call([{ 'name': 'srcFile.png', 'content': sourceBytes }], ["convert", "srcFile.png", "-rotate", "90", "-resize", "200%", "out.png"]);
-    
-          // ...
+          const files = [{ 'name': 'srcFile.png', 'content': sourceBytes }];
+          const command = ["convert", "srcFile.png", "-rotate", "90", "-resize", "200%", "out.png"];
+          let processedFiles = await Magick.Call(files, command);
+
+          // response can be multiple files (example split)
+          // here we know we just have one
+          let firstOutputImage = processedFiles[0]
+          rotatedImage.src = URL.createObjectURL(firstOutputImage['blob'])
+          console.log("created image " + firstOutputImage['name'])
         };
-        DoMagickCall();
+        doMagickCall();
       </script>
     </header>
 
@@ -46,6 +55,14 @@
       <div id="root">
         Test
       </div>
+
+      <br/>
+      <p>Source image: </p>
+      <img id="srcImage" src="src/images/chateau.JPG" height="400px">
+      <br/>
+      <br/>
+      <p>Rotated and enlarged image: </p>
+      <img id="rotatedImage">
     </main>
   </body>
 
