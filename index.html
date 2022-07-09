@@ -60,7 +60,8 @@
 
           console.log("dataURL:", dataURL);
 
-          let sourceBytes = base64ToArrayBuffer(dataURL.split(",")[0]);
+          // let sourceBytes = base64ToArrayBuffer(dataURL.split(",")[0]);
+          let sourceBytes = base64ToArrayBuffer(dataURL);
           console.log("sourceBytes:", sourceBytes);
 
           // calling image magick with one source image, and command to rotate & resize image
